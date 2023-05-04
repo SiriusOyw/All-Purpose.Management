@@ -7,6 +7,7 @@ using System.Net.NetworkInformation;
 using Zhaoxi.Manage.BusinessInterface;
 using Zhaoxi.Manage.Common.Extensions;
 using Zhaoxi.Manage.Common.Result;
+using Zhaoxi.Manage.MentApi.Utility.Filters;
 using Zhaoxi.Manage.MentApi.Utility.SwaggerExt;
 using Zhaoxi.Manage.Models.DTO;
 using Zhaoxi.Manage.Models.Entity;
@@ -44,7 +45,37 @@ namespace Zhaoxi.Manage.MentApi.Controllers.SystemApi
                 Success = true,
                 Message = "用户分页查询"
             };
-            return new JsonResult(result);
+            return await Task.FromResult(new JsonResult(result));
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidatePara]
+        public async Task<JsonResult> AddUser([FromServices] IUserManagerService userManagerService, [FromServices] IMapper mapper, SysUserDTO userDTO)
+        {
+            //对于数据在添加之前
+            //参数的校验
+            //if (true)
+            //{
+            //}
+
+            //可以通过actionFilter扩展
+
+
+            var adduser = mapper.Map<Sys_User>(userDTO);
+            //adduser.Password=
+            userManagerService.Insert(adduser);
+            var result = new JsonResult(new ApiDataResult<SysUserDTO>()
+            {
+                Data = mapper.Map<SysUserDTO>(adduser),
+                Success = true,
+                Message = "添加用户"
+            });
+            return await Task.FromResult(result);
         }
     }
 }
