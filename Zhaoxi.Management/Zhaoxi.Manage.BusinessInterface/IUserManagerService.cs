@@ -9,7 +9,8 @@ namespace Zhaoxi.Manage.BusinessInterface
     /// <summary>
     /// 
     /// </summary>
-    public interface IUserManagerService
+    public interface IUserManagerService : IBaseService
     {
+        public void DeleteCompanyUser();
     }
 }

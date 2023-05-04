@@ -13,7 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zhaoxi.Manage.BusinessInterface\Zhaoxi.Manage.BusinessInterface.csproj" />
+    <ProjectReference Include="..\Zhaoxi.Manage.BusinessService\Zhaoxi.Manage.BusinessService.csproj" />
+    <ProjectReference Include="..\Zhaoxi.Manage.Common\Zhaoxi.Manage.Common.csproj" />
     <ProjectReference Include="..\Zhaoxi.Manage.Core\Zhaoxi.Manage.Core.csproj" />
+    <ProjectReference Include="..\Zhaoxi.Manage.Models.DTO\Zhaoxi.Manage.Models.DTO.csproj" />
     <ProjectReference Include="..\Zhaoxi.Manage.Models\Zhaoxi.Manage.Models.csproj" />
   </ItemGroup>
 

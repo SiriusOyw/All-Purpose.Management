@@ -5,10 +5,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zhaoxi.Manage.Common;
 using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
-namespace Zhaoxi.Manage.Common
+namespace Zhaoxi.Manage.Common.Extensions
 {
     /// <summary>
     /// Extension methods for Collections.

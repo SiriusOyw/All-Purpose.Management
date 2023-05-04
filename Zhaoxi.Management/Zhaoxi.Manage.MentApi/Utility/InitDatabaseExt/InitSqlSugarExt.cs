@@ -1,18 +1,17 @@
 ﻿using SqlSugar;
-using System.Reflection;
 
 namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
 {
     /// <summary>
-    /// 是否初始化数据库
+    /// 初始化SqlSugar
     /// </summary>
-    public static class InitDatabaseExt
+    public static class InitSqlSugarExt
     {
         /// <summary>
-        /// 初始化数据库
+        /// 初始化SqlSugar
         /// </summary>
         /// <param name="builder"></param>
-        public static void InitDatabase(this WebApplicationBuilder builder)
+        public static void InitSqlSugar(this WebApplicationBuilder builder)
         {
             //读取配置文件中的数据库连接字符串
             string? connectionString = builder.Configuration.GetConnectionString("ConnectionString");
@@ -21,23 +20,40 @@ namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
             {
                 throw new Exception("请配置数据库链接字符串");
             }
+
             ConnectionConfig connection = new ConnectionConfig()
             {
                 ConnectionString = connectionString,
                 DbType = DbType.SqlServer,
                 IsAutoCloseConnection = true,
+                InitKeyType = InitKeyType.Attribute
             };
-            //配置SqlSugar--初始化数据库
-            using (SqlSugarClient client = new SqlSugarClient(connection))
+
+            builder.Services.AddScoped<ISqlSugarClient>(s =>
             {
-                //删除数据库--如有--删 否则 不操作
-                client.DbMaintenance.CreateDatabase();
-
-                Assembly assembly = Assembly.LoadFile(Path.Combine(AppContext.BaseDirectory, "Zhaoxi.Manage.Models.dll"));
-                Type[] typeArray = assembly.GetTypes().Where(t=>t.Namespace.Equals("Zhaoxi.Manage.Models.Entity")).ToArray();
-
-                client.CodeFirst.InitTables(typeArray);
-            }
+                SqlSugarClient client = new SqlSugarClient(connection);
+                client.Aop.OnLogExecuting = (s, p) =>
+                {
+                    Console.WriteLine($"OnLogExecuting:输出Sql语句：{s} || 参数为：{string.Join(",", p.Select(p => p.Value))}");
+                };
+                client.Aop.OnExecutingChangeSql = (s, p) =>
+                {
+                    Console.WriteLine($"OnExecutingChangeSql:输出Sql语句：{s} || 参数为：{string.Join(",", p.Select(p => p.Value))}");
+                    return new KeyValuePair<string, SugarParameter[]>(s, p);
+                };
+                client.Aop.OnLogExecuted = (s, p) =>
+                {
+                    Console.WriteLine($"OnLogExecuted:输出Sql语句：{s} || 参数为：{string.Join(",", p.Select(p => p.Value))}");
+                };
+                client.Aop.OnError = e =>
+                {
+                    Console.WriteLine($"OnError:Sql语句执行异常:{e.Message}");
+                };
+                {
+                    //可以配置对于数据库操作的过滤器--SqlSugar特有的
+                }
+                return client;
+            });
         }
     }
 }

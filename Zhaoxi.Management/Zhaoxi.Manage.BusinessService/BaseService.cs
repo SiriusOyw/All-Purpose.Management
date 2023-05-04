@@ -1,10 +1,5 @@
 ﻿using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Zhaoxi.Manage.BusinessInterface;
 
 namespace Zhaoxi.Manage.BusinessService
@@ -86,10 +81,7 @@ namespace Zhaoxi.Manage.BusinessService
         public PagingData<T> QueryPage<T>(Expression<Func<T, bool>> funcWhere, int pageSize, int pageIndex, Expression<Func<T, object>> funcOrderby, bool isAsc = true) where T : class
         {
             var list = _Client.Queryable<T>();
-            if (funcWhere != null)
-            {
-                list = list.Where(funcWhere);
-            }
+            list = list.WhereIF(funcWhere != null, funcWhere);
             list = list.OrderByIF(true, funcOrderby, isAsc ? OrderByType.Asc : OrderByType.Desc);
             PagingData<T> result = new PagingData<T>()
             {

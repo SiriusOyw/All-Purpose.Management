@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zhaoxi.Manage.BusinessInter
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zhaoxi.Manage.BusinessService", "Zhaoxi.Manage.BusinessService\Zhaoxi.Manage.BusinessService.csproj", "{0CEEE6AA-8ABE-480A-98FC-3A502E48D74F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhaoxi.Manage.Common", "Zhaoxi.Manage.Common\Zhaoxi.Manage.Common.csproj", "{1926B36B-AC83-4740-B669-6AE568D37F49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zhaoxi.Manage.Common", "Zhaoxi.Manage.Common\Zhaoxi.Manage.Common.csproj", "{1926B36B-AC83-4740-B669-6AE568D37F49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zhaoxi.Manage.Models.DTO", "Zhaoxi.Manage.Models.DTO\Zhaoxi.Manage.Models.DTO.csproj", "{27690E48-300C-4112-8084-2223EE7D2BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1926B36B-AC83-4740-B669-6AE568D37F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1926B36B-AC83-4740-B669-6AE568D37F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1926B36B-AC83-4740-B669-6AE568D37F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27690E48-300C-4112-8084-2223EE7D2BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27690E48-300C-4112-8084-2223EE7D2BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27690E48-300C-4112-8084-2223EE7D2BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27690E48-300C-4112-8084-2223EE7D2BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

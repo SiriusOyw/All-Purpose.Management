@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zhaoxi.Manage.Core\Zhaoxi.Manage.Core.csproj" />
+    <ProjectReference Include="..\Zhaoxi.Manage.Models.DTO\Zhaoxi.Manage.Models.DTO.csproj" />
+    <ProjectReference Include="..\Zhaoxi.Manage.Models\Zhaoxi.Manage.Models.csproj" />
   </ItemGroup>
 
 </Project>

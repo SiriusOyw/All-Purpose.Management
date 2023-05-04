@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zhaoxi.Manage.Common
+namespace Zhaoxi.Manage.Common.Extensions
 {
     public static class StringExtensions
     {
