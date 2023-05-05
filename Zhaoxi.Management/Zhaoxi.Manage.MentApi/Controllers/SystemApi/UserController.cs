@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
-using System.Linq.Expressions;
-using System.Net.NetworkInformation;
 using Zhaoxi.Manage.BusinessInterface;
 using Zhaoxi.Manage.Common.Extensions;
 using Zhaoxi.Manage.Common.Result;
@@ -19,6 +16,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers.SystemApi
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [ExceptionFilter]
     [ApiExplorerSettings(IgnoreApi = false, GroupName = nameof(ApiVersions.V1))]
     public class UserController : ControllerBase
     {
@@ -54,7 +52,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers.SystemApi
         /// <param name=""></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidatePara]
+        [ValidateParaFilter]
         public async Task<JsonResult> AddUser([FromServices] IUserManagerService userManagerService, [FromServices] IMapper mapper, SysUserDTO userDTO)
         {
             //对于数据在添加之前

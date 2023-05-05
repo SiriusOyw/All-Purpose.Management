@@ -10,7 +10,7 @@ namespace Zhaoxi.Manage.MentApi.Utility.Filters
     /// <summary>
     /// 参数校验
     /// </summary>
-    public class ValidateParaAttribute : Attribute, IAsyncActionFilter
+    public class ValidateParaFilterAttribute : Attribute, IAsyncActionFilter
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
