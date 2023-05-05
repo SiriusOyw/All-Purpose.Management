@@ -1,5 +1,7 @@
-﻿using SqlSugar;
+﻿using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 using System.Reflection;
+using Zhaoxi.Manage.Models.Entity;
 
 namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
 {
@@ -14,6 +16,51 @@ namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
         /// <param name="builder"></param>
         public static void InitDatabase(this WebApplicationBuilder builder)
         {
+            List<Sys_Menu> MenuList = new List<Sys_Menu>();
+            Assembly asm = Assembly.GetExecutingAssembly();
+            IEnumerable<Type> controlleractionlist = asm.GetTypes()
+                .Where(type => typeof(ControllerBase)
+                .IsAssignableFrom(type));
+
+            foreach (var controller in controlleractionlist)
+            {
+                if (controller.IsDefined(typeof(FunctionAttribute), true))
+                {
+                    FunctionAttribute? attribute = controller.GetCustomAttribute<FunctionAttribute>();
+                    Guid guid = Guid.NewGuid();
+
+                    Sys_Menu sysMenu = new Sys_Menu()
+                    {
+                        Id = guid,
+                        ParentId = default,
+                        MenuText = attribute?.GetDescription(),
+                        MenuType = attribute is null ? (int)MuType.Page : (int)attribute.GetMuType()
+                    };
+
+                    MenuList.Add(sysMenu);
+
+                    var mehtodlist = controller.GetMethods()
+                        .Where(m => m.IsDefined(typeof(FunctionAttribute), true));
+
+                    foreach (var mehtod in mehtodlist)
+                    {
+                        FunctionAttribute? childAttribute =
+                            mehtod.GetCustomAttribute<FunctionAttribute>();
+                        Sys_Menu childMenu = new Sys_Menu()
+                        {
+                            Id = Guid.NewGuid(),
+                            ParentId = guid,
+                            FullName = $"{controller.FullName}.{mehtod.Name}",
+                            MenuText = childAttribute?.GetDescription(),
+                            MenuType = childAttribute is null ? (int)MuType.Btn : (int)childAttribute.GetMuType(),
+                            ControllerName = controller.Name.ToLower().Replace("controller", ""),
+                            ActionName = mehtod.Name.ToLower()
+                        };
+                        MenuList .Add(childMenu);
+                    }
+                }
+            }
+
             //读取配置文件中的数据库连接字符串
             string? connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 
@@ -39,6 +86,7 @@ namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
                 t.Namespace.Equals("Zhaoxi.Manage.Models.Entity")).ToArray();
 
                 client.CodeFirst.InitTables(typeArray);
+                client.Insertable(MenuList).ExecuteCommand();
             }
         }
     }

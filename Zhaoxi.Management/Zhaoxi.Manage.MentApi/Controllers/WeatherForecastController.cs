@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt;
 using Zhaoxi.Manage.MentApi.Utility.SwaggerExt;
 
 namespace Zhaoxi.Manage.MentApi.Controllers
@@ -9,6 +10,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers
     [ApiController]
     [Route("[controller]")]
     [ApiExplorerSettings(IgnoreApi = false, GroupName = nameof(ApiVersions.V1))]
+    [Function(MuType.Page,"²âÊÔ¿ØÖÆÆ÷")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -28,6 +30,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "GetWeatherForecast")]
+        [Function(MuType.Btn, "Get")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -44,6 +47,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Function(MuType.Btn, "PostInfo")]
         public IEnumerable<WeatherForecast> PostInfo()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -60,6 +64,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut]
+        [Function(MuType.Btn, "Put")]
         public IEnumerable<WeatherForecast> PutInfo()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -76,6 +81,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
+        [Function(MuType.Btn, "DeleteInfo")]
         public IEnumerable<WeatherForecast> DeleteInfo()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

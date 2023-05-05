@@ -5,6 +5,7 @@ using Zhaoxi.Manage.BusinessInterface;
 using Zhaoxi.Manage.Common.Extensions;
 using Zhaoxi.Manage.Common.Result;
 using Zhaoxi.Manage.MentApi.Utility.Filters;
+using Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt;
 using Zhaoxi.Manage.MentApi.Utility.SwaggerExt;
 using Zhaoxi.Manage.Models.DTO;
 using Zhaoxi.Manage.Models.Entity;
@@ -18,6 +19,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers.SystemApi
     [ApiController]
     [ExceptionFilter]
     [ApiExplorerSettings(IgnoreApi = false, GroupName = nameof(ApiVersions.V1))]
+    [Function(MuType.Page,"用户管理")]
     public class UserController : ControllerBase
     {
         /// <summary>
@@ -31,6 +33,7 @@ namespace Zhaoxi.Manage.MentApi.Controllers.SystemApi
         [HttpGet]
         [Route("{pageIndex:int}/{pageSize:int}/{searchaString}")]
         [Route("{pageIndex:int}/{pageSize:int}")]
+        [Function(MuType.Btn,"查询用户")]
         public async Task<JsonResult> GetUserPage([FromServices] IUserManagerService userManagerService, [FromServices] IMapper mapper, int pageIndex, int pageSize, string? searchaString = null)
         {
             Expressionable<Sys_User> expressionable = new Expressionable<Sys_User>();
