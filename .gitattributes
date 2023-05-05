@@ -1,0 +1,67 @@
+# Set default behavior to automatically normalize line endings
+* text=auto eol=lf
+
+# C# source code
+*.cs text eol=lf
+
+# Visual Studio files
+*.sln text eol=lf
+*.csproj text eol=lf
+*.vcxproj text eol=lf
+*.vbproj text eol=lf
+*.fsproj text eol=lf
+
+# NuGet packages
+*.nupkg binary
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# .NET Core
+project.lock.json binary
+project.fragment.lock.json binary
+*.nuget.props text eol=lf
+*.nuget.targets text eol=lf
+
+# Visual Studio cache files
+.vs/
+*.vspscc
+*.vssscc
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Test Results
+[TestResults]/
+[Nn]bproject/private/
+*.psess
+*.vsp
+*.vspx
+*.trx
+
+# Resharper files
+_ReSharper*/
+*.resharper
+*.DotSettings
+
+# GhostDoc
+_GhostDoc.xml
+
+# StyleCop
+StyleCop.Cache
+
+# Build results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+*.js linguist-language=C#

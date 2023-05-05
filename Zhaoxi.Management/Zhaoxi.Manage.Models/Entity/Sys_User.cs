@@ -11,7 +11,7 @@ namespace Zhaoxi.Manage.Models.Entity
     /// 用户信息
     /// </summary>
     [SugarTable("Sys_User")]
-    public class Sys_User
+    public class Sys_User : Sys_BaseModel
     {
         [SugarColumn(ColumnName = "UserId", IsIdentity = true, IsPrimaryKey = true)]
         public int UserId { get; set; }

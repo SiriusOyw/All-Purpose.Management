@@ -11,7 +11,7 @@ namespace Zhaoxi.Manage.Models.Entity
     /// 和数据库对应实体---在数据库中保存功能菜单和按钮
     /// </summary>
     [SugarTable("Sys_Menu")]
-    public class Sys_Menu
+    public class Sys_Menu : Sys_BaseModel
     {
         [SugarColumn(IsPrimaryKey = true)]
         public Guid Id { get; set; }

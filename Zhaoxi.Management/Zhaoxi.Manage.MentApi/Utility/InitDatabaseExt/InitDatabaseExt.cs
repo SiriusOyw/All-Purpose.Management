@@ -34,7 +34,9 @@ namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
                 client.DbMaintenance.CreateDatabase();
 
                 Assembly assembly = Assembly.LoadFile(Path.Combine(AppContext.BaseDirectory, "Zhaoxi.Manage.Models.dll"));
-                Type[] typeArray = assembly.GetTypes().Where(t=>t.Namespace.Equals("Zhaoxi.Manage.Models.Entity")).ToArray();
+                Type[] typeArray = assembly.GetTypes().Where(t =>
+                !t.Name.Equals("Sys_BaseModel") &&
+                t.Namespace.Equals("Zhaoxi.Manage.Models.Entity")).ToArray();
 
                 client.CodeFirst.InitTables(typeArray);
             }
