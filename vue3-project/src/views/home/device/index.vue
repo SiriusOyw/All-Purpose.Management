@@ -1,11 +1,11 @@
 <template>
-  <div>
-    {{ title }}
-  </div>
+   <div>
+      {{title}}
+   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {ref} from 'vue'
 
 const title = ref('设备监控')
 

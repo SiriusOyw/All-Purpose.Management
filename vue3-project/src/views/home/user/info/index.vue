@@ -1,12 +1,12 @@
 <template>
-  <div>
-    {{ title }}
-  </div>
+   <div>
+      {{title}}
+   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {ref} from 'vue'
 
-const title = ref('登录')
+const title = ref('用户详情')
 
 </script>
