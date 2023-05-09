@@ -6,4 +6,8 @@
   <router-view />
 </template>
 
-
+<style scoped>
+div {
+  color: red;
+}
+</style>

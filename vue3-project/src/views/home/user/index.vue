@@ -1,6 +1,7 @@
 <template>
    <div>
-      {{obj.title}}==={{title}}
+      hello 123456
+      <router-view />
    </div>
 </template>
 
@@ -12,16 +13,6 @@ const obj = reactive({   //响应式数据
    count:1
 })
 
-const title = ref('123456');  //响应式数据   const title = reactive({value:'123456'})  title.value
-
-const abc = 'abc';  //非响应式数据
-
-function action(){
-
-}
-const action2 = ()=>{
-
-}
 
 </script>
 
