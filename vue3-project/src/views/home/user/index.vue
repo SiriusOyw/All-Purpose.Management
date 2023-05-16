@@ -1,6 +1,5 @@
 <template>
    <div>
-      hello 123456
       <router-view />
    </div>
 </template>
@@ -14,18 +13,6 @@ const obj = reactive({   //响应式数据
 })
 
 
+
 </script>
 
-// <script >
-// import {defineComponent, ref,reactive} from 'vue'
-// export default defineComponent({
-//    setup(){
-//       //创建响应式数据
-//       const state = reactive({
-//          title:'用户管理8888',
-//          count:1
-//       })
-//        return state;
-//    }
-// })
-// </script>

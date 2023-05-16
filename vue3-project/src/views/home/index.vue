@@ -1,17 +1,18 @@
 <template>
-  <div id="module">
+   <div id="module">
     <el-container>
-      <!-- 左侧导航 -->
-      <NavMenu />
+         <!-- 左侧导航 -->
+         <NavMenu />
       <el-container>
-        <!-- 右侧头部 -->
+         <!-- 右侧头部 -->
         <el-header>
-          <!--面包屑-->
-          <breadcrumb />
+          <!-- 面包屑 -->
+          <Breadcrumb />
+          
         </el-header>
         <!-- 右侧主体 -->
         <el-main>
-          <router-view />
+            <router-view />
         </el-main>
       </el-container>
     </el-container>
@@ -19,9 +20,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {ref} from 'vue'
 import NavMenu from './navMenu.vue' //导航 
-import breadcrumb from './breadcrumb.vue'
+import Breadcrumb from './breadcrumb.vue'
 
 const title = ref('首页')
 
