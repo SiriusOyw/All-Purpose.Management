@@ -1,27 +1,35 @@
 <template>
-    <!-- 无子级 -->
-    <el-menu-item :index="item.url" v-if="!item.child">
-        <el-icon><component :is="item.icon"></component></el-icon>
-        <span>{{item.title}}</span>
-    </el-menu-item>
 
-    <!-- 有子级 -->
-    <el-sub-menu :index="item.url" v-else>
-        <template #title>
-            <el-icon><component :is="item.icon"></component></el-icon>
-            <span>{{item.title}}</span>
-        </template>
-        <NavItem v-for="sub in item.child" :key="sub.url" :item="sub"/>
-    </el-sub-menu>
+         <!-- 无子级 -->
+         <el-menu-item :index="basePath" v-if="!item.child">
+          <el-icon><component :is="item.flag"></component></el-icon>
+          <span>{{item.name}}</span>
+        </el-menu-item>
+        <!-- 有子级 -->
+        <el-sub-menu :index="basePath" v-else>
+            <template #title>
+               <el-icon><component :is="item.flag"></component></el-icon>
+               <span>{{item.name}}</span>
+            </template>
+            <NavItem  v-for="sub in item.child" :key="sub.url" :item="sub" :basePath="sub.url" />
+         </el-sub-menu>
+
 </template>
 
 <script setup>
-import {ref,reactive,defineProps} from 'vue'
+import {ref,reactive} from 'vue'
 
-const {item} = defineProps({
-    item:{
-        type:Object
+
+const {item,basePath} = defineProps({
+   item:{
+        type:Object,
+    },
+    basePath:{
+       type:String
     }
 })
+
+
+
 
 </script>

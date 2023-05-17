@@ -1,12 +1,14 @@
 <template>
    <div>
-     <router-view />
+      <router-view />
    </div>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref,reactive} from 'vue'
 
-const title = ref('设备监控')
+ const obj = reactive({id:'订单管理'})
+
+
 
 </script>
