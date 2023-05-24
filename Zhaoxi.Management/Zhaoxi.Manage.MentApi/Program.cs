@@ -1,4 +1,4 @@
-using Microsoft.OpenApi.Models;
+ï»¿using Microsoft.OpenApi.Models;
 using SqlSugar;
 using System.Reflection;
 using Zhaoxi.Manage.BusinessInterface;
@@ -6,17 +6,18 @@ using Zhaoxi.Manage.BusinessInterface.MapConfig;
 using Zhaoxi.Manage.BusinessService;
 using Zhaoxi.Manage.MentApi.Utility.HostingExt;
 using Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt;
+using Zhaoxi.Manage.MentApi.Utility.RegisterExt;
 using Zhaoxi.Manage.MentApi.Utility.SwaggerExt;
 
 namespace Zhaoxi.Manage.MentApi
 {
     /// <summary>
-    /// ²âÊÔ¿ØÖÆÆ÷
+    /// æµ‹è¯•æ§åˆ¶å™¨
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// ³ÌĞòÈë¿Ú
+        /// ç¨‹åºå…¥å£
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
@@ -24,16 +25,18 @@ namespace Zhaoxi.Manage.MentApi
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // ¶ÁÈ¡Êı¾İ¿âÁ¬½Ó×Ö·û´®
+            // è¯»å–æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²
             builder.Host.AddAppSettingsSecretsJson();
+
+            builder.CorsDomainsPolicy();//é…ç½®æ”¯æŒè·¨åŸŸçš„ç­–ç•¥
 
             if (builder.Configuration["IsInitDatabase"] == "1")
             {
-                //ÅäÖÃSqlSugar--³õÊ¼»¯Êı¾İ¿â
-                //ÏîÄ¿Ê×´ÎÆô¶¯
+                //é…ç½®SqlSugar--åˆå§‹åŒ–æ•°æ®åº“
+                //é¡¹ç›®é¦–æ¬¡å¯åŠ¨
                 builder.InitDatabase();
             }
-            builder.InitSqlSugar();//³õÊ¼»¯SqlSugar-×¢²áµ½IOCÈİÆ÷
+            builder.InitSqlSugar();//åˆå§‹åŒ–SqlSugar-æ³¨å†Œåˆ°IOCå®¹å™¨
             builder.Services.AddTransient<IUserManagerService, UserManagerService>();
 
             // Add services to the container.
@@ -43,9 +46,12 @@ namespace Zhaoxi.Manage.MentApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddSwaggerExt();
 
+            //æ³¨å†ŒAutoMapper
             builder.Services.AddAutoMapper(typeof(AutoMapperConfigs));
 
             var app = builder.Build();
+
+            app.UseCorsDomainsPolicy();//é…ç½®ç”Ÿæ•ˆ
 
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
