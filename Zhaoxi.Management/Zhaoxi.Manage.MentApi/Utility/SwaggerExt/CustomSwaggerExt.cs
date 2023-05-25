@@ -18,7 +18,7 @@ namespace Zhaoxi.Manage.MentApi.Utility.SwaggerExt
                 {
                     option.SwaggerDoc(version, new OpenApiInfo()
                     {
-                        Title = "朝夕教育高级班项目实战Api文档",
+                        Title = "管理后台Api文档",
                         Version = version,
                         Description = $"通用版本的CoreApi版本{version}",
                     });

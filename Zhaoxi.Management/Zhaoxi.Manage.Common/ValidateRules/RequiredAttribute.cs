@@ -2,7 +2,6 @@
 {
     public class RequiredAttribute : BaseAbstractAttribute
     {
-
         public RequiredAttribute(string? message) : base(message)
         {
         }

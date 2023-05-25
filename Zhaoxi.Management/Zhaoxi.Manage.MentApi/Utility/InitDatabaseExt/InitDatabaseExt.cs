@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 using System.Reflection;
+using Zhaoxi.Manage.BusinessInterface;
+using Zhaoxi.Manage.BusinessService;
 using Zhaoxi.Manage.Models.Entity;
 
 namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
@@ -56,7 +58,7 @@ namespace Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt
                             ControllerName = controller.Name.ToLower().Replace("controller", ""),
                             ActionName = mehtod.Name.ToLower()
                         };
-                        MenuList .Add(childMenu);
+                        MenuList.Add(childMenu);
                     }
                 }
             }
