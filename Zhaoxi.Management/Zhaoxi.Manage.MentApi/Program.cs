@@ -7,6 +7,7 @@ using Zhaoxi.Manage.BusinessInterface.MapConfig;
 using Zhaoxi.Manage.BusinessService;
 using Zhaoxi.Manage.MentApi.Utility.HostingExt;
 using Zhaoxi.Manage.MentApi.Utility.InitDatabaseExt;
+using Zhaoxi.Manage.MentApi.Utility.RegisterExt;
 using Zhaoxi.Manage.MentApi.Utility.SwaggerExt;
 
 namespace Zhaoxi.Manage.MentApi
@@ -28,6 +29,8 @@ namespace Zhaoxi.Manage.MentApi
             // 读取数据库连接字符串
             builder.Host.AddAppSettingsSecretsJson();
 
+            builder.CorsDomainsPolicy();//配置支持跨域的策略
+
             if (builder.Configuration["IsInitDatabase"] == "1")
             {
                 //配置SqlSugar--初始化数据库
@@ -46,9 +49,12 @@ namespace Zhaoxi.Manage.MentApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.AddSwaggerExt();
 
+            //注册AutoMapper
             builder.Services.AddAutoMapper(typeof(AutoMapperConfigs));
 
             var app = builder.Build();
+
+            app.UseCorsDomainsPolicy();//配置生效
 
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
