@@ -1,86 +1,104 @@
 # All-Purpose.Management
-
 <template>
   <div class="transfer-container">
-    <div class="transfer-panel">
-      <div class="panel-header">源数据</div>
-      <div class="panel-body">
-        <div class="table-container">
-          <el-table
-            ref="leftTable"
-            :data="leftFilteredData"
-            border
-            style="width: 100%"
-            @selection-change="handleLeftSelectionChange"
-          >
-            <el-table-column type="selection" width="55" />
-            <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" label="姓名" />
-            <el-table-column prop="age" label="年龄" width="80" />
-            <el-table-column prop="address" label="地址" />
-            <el-table-column prop="email" label="邮箱" />
-          </el-table>
-        </div>
-        <div class="pagination">
-          <el-pagination
-            v-model:current-page="leftCurrentPage"
-            v-model:page-size="leftPageSize"
-            :page-sizes="[5, 10, 20, 50]"
-            :total="leftTotal"
-            layout="total, sizes, prev, pager, next, jumper"
-            @size-change="handleLeftSizeChange"
-            @current-change="handleLeftCurrentChange"
-          />
+    <div class="search-container">
+      <el-input
+        v-model="leftSearch"
+        class="search-input"
+        placeholder="搜索源数据"
+        clearable
+        @clear="handleLeftSearchClear"
+        @input="handleLeftSearch"
+      >
+        <template #prefix>
+          <i class="el-icon-search" />
+        </template>
+      </el-input>
+    </div>
+
+    <div class="transfer-content">
+      <div class="transfer-panel">
+        <div class="panel-header">源数据</div>
+        <div class="panel-body">
+          <div class="table-container">
+            <el-table
+              ref="leftTable"
+              :data="leftFilteredData"
+              border
+              style="width: 100%"
+              @selection-change="handleLeftSelectionChange"
+            >
+              <el-table-column type="selection" width="55" />
+              <el-table-column prop="id" label="ID" width="80" />
+              <el-table-column prop="name" label="姓名" />
+              <el-table-column prop="age" label="年龄" width="80" />
+              <el-table-column prop="address" label="地址" />
+              <el-table-column prop="email" label="邮箱" />
+            </el-table>
+          </div>
+          <div class="pagination">
+            <el-pagination
+              v-model:current-page="leftCurrentPage"
+              v-model:page-size="leftPageSize"
+              :page-sizes="[5, 10, 20, 50]"
+              :total="leftTotal"
+              layout="total, sizes, prev, pager, next, jumper"
+              @size-change="handleLeftSizeChange"
+              @current-change="handleLeftCurrentChange"
+            />
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="transfer-buttons">
-      <button
-        class="transfer-button"
-        :disabled="leftSelected.length === 0"
-        @click="moveToRight"
-      >
-        <i class="el-icon-arrow-right">To Left</i>
-      </button>
-      <button
-        class="transfer-button"
-        :disabled="rightSelected.length === 0"
-        @click="moveToLeft"
-      >
-        <i class="el-icon-arrow-left">To Right</i>
-      </button>
-    </div>
+      <div class="transfer-buttons">
+        <el-button
+          class="transfer-button"
+          :disabled="leftSelected.length === 0"
+          @click="moveToRight"
+          :icon="ArrowLeft"
+        >
+          <i class="el-icon-arrow-right" />
+        </el-button>
+        <el-button
+          class="transfer-button"
+          :disabled="rightSelected.length === 0"
+          @click="moveToLeft"
+          :icon="ArrowRight"
+        >
+          <!-- <i class="el-icon-arrow-left" /> -->
+        </el-button>
+      </div>
 
-    <div class="transfer-panel">
-      <div class="panel-header">目标数据</div>
-      <div class="panel-body">
-        <div class="table-container">
-          <el-table
-            ref="rightTable"
-            :data="rightFilteredData"
-            border
-            style="width: 100%"
-            @selection-change="handleRightSelectionChange"
-          >
-            <el-table-column type="selection" width="55" />
-            <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="name" label="姓名" />
-            <el-table-column prop="age" label="年龄" width="80" />
-            <el-table-column prop="address" label="地址" />
-            <el-table-column prop="email" label="邮箱" />
-          </el-table>
-        </div>
-        <div class="pagination">
-          <el-pagination
-            v-model:current-page="rightCurrentPage"
-            v-model:page-size="rightPageSize"
-            :page-sizes="[5, 10, 20, 50]"
-            :total="rightTotal"
-            layout="total, sizes, prev, pager, next, jumper"
-            @size-change="handleRightSizeChange"
-            @current-change="handleRightCurrentChange"
-          />
+      <div class="transfer-panel">
+        <div class="panel-header">目标数据</div>
+        <div class="panel-body">
+          <div class="table-container">
+            <el-table
+              ref="rightTable"
+              :data="rightFilteredData"
+              border
+              style="width: 100%"
+              @selection-change="handleRightSelectionChange"
+            >
+              <el-table-column type="selection" width="55" />
+              <el-table-column prop="id" label="ID" width="80" />
+              <el-table-column prop="name" label="姓名" />
+              <el-table-column prop="age" label="年龄" width="80" />
+              <el-table-column prop="address" label="地址" />
+              <el-table-column prop="email" label="邮箱" />
+            </el-table>
+          </div>
+          <div class="pagination">
+            <el-pagination
+              v-model:current-page="rightCurrentPage"
+              v-model:page-size="rightPageSize"
+              :page-sizes="[5, 10, 20, 50]"
+              :total="rightTotal"
+              layout="total, sizes, prev, pager, next, jumper"
+              @size-change="handleRightSizeChange"
+              @current-change="handleRightCurrentChange"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -90,8 +108,14 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { ElInput, ElTable, ElTableColumn, ElPagination } from "element-plus";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Delete,
+  Edit,
+  Share
+} from "@element-plus/icons-vue";
 
-// 左侧数据
 const leftData = ref([
   {
     id: 1,
@@ -307,15 +331,13 @@ const handleRightSizeChange = val => {
 const handleRightCurrentChange = val => {
   rightCurrentPage.value = val;
 };
-
 // (已移除 export default，<script setup> 不需要导出对象)
 </script>
 
 <style>
 .transfer-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -323,6 +345,13 @@ const handleRightCurrentChange = val => {
   background-color: #f5f7fa;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.transfer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .transfer-panel {
@@ -370,9 +399,15 @@ const handleRightCurrentChange = val => {
   padding: 15px;
 }
 
-.search-input {
-  margin-bottom: 15px;
+.search-container {
+  display: flex;
+  gap: 20px;
   width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  margin-bottom: 15px;
 }
 
 .pagination {
@@ -386,3 +421,4 @@ const handleRightCurrentChange = val => {
   overflow-y: auto;
 }
 </style>
+
